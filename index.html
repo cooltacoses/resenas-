@@ -67,6 +67,7 @@
             margin-top: 20px;
             font-weight: bold;
             font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .small-text {
             font-size: 14px;
@@ -80,12 +81,12 @@
         <div class="logo">🌮</div>
         <h1>Cool Tacos</h1>
         <div class="message">
-            <p>Ouverture de Google Chrome...</p>
+            <p>Ouverture dans Chrome...</p>
         </div>
         <div class="spinner"></div>
-        <p class="small-text">Si rien ne se passe, cliquez ci-dessous :</p>
+        <p class="small-text">Si rien ne se passe après 3 secondes :</p>
         <a href="https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE" class="button">
-            Donner un avis
+            Cliquez ici
         </a>
     </div>
 
@@ -93,52 +94,54 @@
         const reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
         const userAgent = navigator.userAgent.toLowerCase();
         
-        // Détecter le système
         const isAndroid = userAgent.includes("android");
         const isIOS = userAgent.includes("iphone") || userAgent.includes("ipad");
         
-        function tryOpenInChrome() {
-            if (isAndroid) {
-                // Pour Android - essayer plusieurs méthodes
-                
-                // Méthode 1: Intent Chrome direct
-                const chromeIntent = "intent://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE#Intent;scheme=https;package=com.android.chrome;end";
-                window.location.href = chromeIntent;
-                
-                // Méthode 2: Après 1 seconde, essayer googlechrome://
-                setTimeout(() => {
-                    window.location.href = "googlechrome://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
-                }, 1000);
-                
-                // Méthode 3: Après 2 secondes, fallback vers URL normale
-                setTimeout(() => {
-                    window.location.href = reviewUrl;
-                }, 2000);
-                
-            } else if (isIOS) {
-                // Pour iOS - essayer plusieurs méthodes
-                
-                // Méthode 1: googlechrome:// (si Chrome installé)
-                window.location.href = "googlechrome://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
-                
-                // Méthode 2: Après 1 seconde, essayer googlechromes://
-                setTimeout(() => {
-                    window.location.href = "googlechromes://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
-                }, 1000);
-                
-                // Méthode 3: Après 2 secondes, fallback vers URL normale
-                setTimeout(() => {
-                    window.location.href = reviewUrl;
-                }, 2000);
-                
-            } else {
-                // Pour ordinateur ou autres - redirection directe
-                window.location.href = reviewUrl;
-            }
+        // Fonction pour Android - Force Chrome avec Intent
+        function openInChromeAndroid() {
+            // Intent spécifique pour Chrome qui évite le sélecteur
+            const chromeIntent = "intent://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;end;";
+            
+            // Créer un lien invisible et le cliquer immédiatement
+            const link = document.createElement('a');
+            link.href = chromeIntent;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Fallback après 2.5 secondes si Chrome ne s'ouvre pas
+            setTimeout(() => {
+                window.location.replace(reviewUrl);
+            }, 2500);
         }
         
-        // Lancer la tentative d'ouverture
-        tryOpenInChrome();
+        // Fonction pour iOS - Force Chrome
+        function openInChromeIOS() {
+            // Essayer d'ouvrir Chrome directement
+            const chromeUrl = "googlechromes://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+            
+            // Créer un iframe invisible pour éviter le popup de choix
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = chromeUrl;
+            document.body.appendChild(iframe);
+            
+            // Fallback après 2 secondes
+            setTimeout(() => {
+                window.location.replace(reviewUrl);
+            }, 2000);
+        }
+        
+        // Exécution immédiate au chargement
+        if (isAndroid) {
+            openInChromeAndroid();
+        } else if (isIOS) {
+            openInChromeIOS();
+        } else {
+            // Desktop - redirection directe
+            window.location.replace(reviewUrl);
+        }
     </script>
 </body>
 </html>
