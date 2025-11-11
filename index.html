@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Tacos - Laissez votre avis</title>
+    <title>Cool Tacos - Avis</title>
     <style>
         * {
             margin: 0;
@@ -11,18 +11,18 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: white;
+            padding: 20px;
         }
         .container {
             text-align: center;
-            padding: 40px 20px;
-            max-width: 500px;
+            max-width: 400px;
         }
         .logo {
             font-size: 80px;
@@ -30,76 +30,15 @@
             animation: bounce 1s infinite;
         }
         h1 {
-            font-size: 32px;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-        .subtitle {
+        .message {
             font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        .instructions {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        .step {
-            display: flex;
-            align-items: center;
             margin: 20px 0;
-            font-size: 18px;
-            text-align: left;
-        }
-        .step-icon {
-            font-size: 40px;
-            margin-right: 15px;
-            min-width: 50px;
-        }
-        .arrow {
-            font-size: 30px;
-            margin: 10px 0;
-            animation: pulse 1.5s infinite;
-        }
-        .countdown {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 20px 0;
-            animation: scale 1s infinite;
-        }
-        .button {
-            background: white;
-            color: #FF6B35;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-        }
-        .button:hover {
-            transform: scale(1.05);
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        @keyframes scale {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        .loading {
-            margin-top: 30px;
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
         }
         .spinner {
             border: 4px solid rgba(255,255,255,0.3);
@@ -108,11 +47,31 @@
             width: 50px;
             height: 50px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 30px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .button {
+            background: white;
+            color: #FF6B35;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .small-text {
+            font-size: 14px;
+            margin-top: 20px;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -120,50 +79,66 @@
     <div class="container">
         <div class="logo">🌮</div>
         <h1>Cool Tacos</h1>
-        <p class="subtitle">Merci pour votre visite !</p>
-        
-        <div class="instructions">
-            <div class="step">
-                <span class="step-icon">1️⃣</span>
-                <span>Google Maps va s'ouvrir</span>
-            </div>
-            <div class="arrow">⬇️</div>
-            <div class="step">
-                <span class="step-icon">2️⃣</span>
-                <span><strong>Descendez en bas</strong> de la page</span>
-            </div>
-            <div class="arrow">⬇️</div>
-            <div class="step">
-                <span class="step-icon">⭐</span>
-                <span>Cliquez sur <strong>"Donner un avis"</strong></span>
-            </div>
+        <div class="message">
+            <p>Ouverture de Google Chrome...</p>
         </div>
-        
-        <div class="countdown" id="countdown">3</div>
-        
-        <div class="loading">
-            <div class="spinner"></div>
-            <p>Redirection automatique...</p>
-        </div>
-        
-        <a href="https://maps.app.goo.gl/YRXHLdzBbrtNRNxZ8" class="button" id="manual-link">
-            Ou cliquez ici maintenant
+        <div class="spinner"></div>
+        <p class="small-text">Si rien ne se passe, cliquez ci-dessous :</p>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE" class="button">
+            Donner un avis
         </a>
     </div>
 
     <script>
-        let count = 3;
-        const countdownEl = document.getElementById('countdown');
+        const reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+        const userAgent = navigator.userAgent.toLowerCase();
         
-        const interval = setInterval(() => {
-            count--;
-            countdownEl.textContent = count;
-            
-            if (count === 0) {
-                clearInterval(interval);
-                window.location.href = 'https://maps.app.goo.gl/YRXHLdzBbrtNRNxZ8';
+        // Détecter le système
+        const isAndroid = userAgent.includes("android");
+        const isIOS = userAgent.includes("iphone") || userAgent.includes("ipad");
+        
+        function tryOpenInChrome() {
+            if (isAndroid) {
+                // Pour Android - essayer plusieurs méthodes
+                
+                // Méthode 1: Intent Chrome direct
+                const chromeIntent = "intent://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE#Intent;scheme=https;package=com.android.chrome;end";
+                window.location.href = chromeIntent;
+                
+                // Méthode 2: Après 1 seconde, essayer googlechrome://
+                setTimeout(() => {
+                    window.location.href = "googlechrome://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+                }, 1000);
+                
+                // Méthode 3: Après 2 secondes, fallback vers URL normale
+                setTimeout(() => {
+                    window.location.href = reviewUrl;
+                }, 2000);
+                
+            } else if (isIOS) {
+                // Pour iOS - essayer plusieurs méthodes
+                
+                // Méthode 1: googlechrome:// (si Chrome installé)
+                window.location.href = "googlechrome://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+                
+                // Méthode 2: Après 1 seconde, essayer googlechromes://
+                setTimeout(() => {
+                    window.location.href = "googlechromes://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+                }, 1000);
+                
+                // Méthode 3: Après 2 secondes, fallback vers URL normale
+                setTimeout(() => {
+                    window.location.href = reviewUrl;
+                }, 2000);
+                
+            } else {
+                // Pour ordinateur ou autres - redirection directe
+                window.location.href = reviewUrl;
             }
-        }, 1000);
+        }
+        
+        // Lancer la tentative d'ouverture
+        tryOpenInChrome();
     </script>
 </body>
 </html>
