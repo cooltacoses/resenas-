@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Donner un avis CoolTacos Murcia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+const placeId = "ChIJ8yK9bgCBYw0RYck5Qqq3WdE";
+const reviewUrl = "https://search.google.com/local/writereview?placeid=" + placeId;
+
+window.onload = function() {
+  const ua = navigator.userAgent.toLowerCase();
+
+  // 🔹 Pour Android → essayer d’ouvrir directement dans Chrome
+  if (ua.includes("android")) {
+    const chromeIntent = "googlechrome://search.google.com/local/writereview?placeid=" + placeId;
+    window.location.href = chromeIntent;
+    setTimeout(() => window.location.href = reviewUrl, 1200);
+  }
+  // 🔹 Pour iPhone ou autres → rediriger normalement
+  else {
+    window.location.href = reviewUrl;
+  }
+};
+</script>
+</head>
+<body>
+<p>Redirection vers Google Reviews…</p>
+</body>
+</html>
