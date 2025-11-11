@@ -45,10 +45,16 @@
             object-fit: cover;
         }
         h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #7CB342;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
         .message {
             font-size: 16px;
@@ -78,11 +84,16 @@
         .browser-choice.show {
             display: block;
         }
-        .browser-choice h2 {
-            font-size: 17px;
-            margin-bottom: 8px;
+        .choice-title {
+            font-size: 18px;
+            margin-bottom: 10px;
             color: #2c3e50;
             font-weight: 600;
+        }
+        .choice-subtitle {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #5f6368;
         }
         .recommendation {
             font-size: 14px;
@@ -110,6 +121,7 @@
             color: #2c3e50;
             text-decoration: none;
             font-weight: 500;
+            position: relative;
         }
         .browser-btn:hover {
             border-color: #7CB342;
@@ -121,9 +133,24 @@
             border-color: #7CB342;
             background: #f1f8e9;
         }
-        .browser-btn svg {
+        .browser-btn.default {
+            border-color: #e0e0e0;
+            background: #fafafa;
+        }
+        .browser-btn .icon {
             width: 28px;
             height: 28px;
+            flex-shrink: 0;
+        }
+        .browser-btn .label {
+            flex: 1;
+            text-align: center;
+        }
+        .not-recommended {
+            font-size: 11px;
+            color: #999;
+            font-weight: 400;
+            margin-left: 4px;
         }
         .footer {
             margin-top: 32px;
@@ -171,24 +198,33 @@
         </div>
         
         <h1>Cool Tacos</h1>
+        <p class="subtitle">Déjanos una reseña en Google</p>
         <p class="message">Redireccionando al formulario de reseñas...</p>
         
         <div class="spinner"></div>
         
         <!-- Choix de navigateur -->
         <div class="browser-choice" id="browserChoice">
-            <h2>Elige tu navegador preferido</h2>
+            <p class="choice-title">Déjanos una reseña en Google</p>
+            <p class="choice-subtitle">Por favor, elige cómo continuar:</p>
             <p class="recommendation">(Recomendamos Chrome)</p>
             <div class="browser-buttons">
                 <a href="#" id="chromeBtn" class="browser-btn chrome">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" fill="#fff"/>
                         <path fill="#EA4335" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
                         <circle cx="12" cy="12" r="4" fill="#4285F4"/>
                         <path fill="#34A853" d="M12 8c-2.21 0-4 1.79-4 4h8c0-2.21-1.79-4-4-4z"/>
                         <path fill="#FBBC04" d="M12 8l-3.46 6h6.92L12 8z"/>
                     </svg>
-                    Google Chrome
+                    <span class="label">Google Chrome</span>
+                </a>
+                <a href="https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE" class="browser-btn default">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#5f6368">
+                        <path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V8h14v10z"/>
+                        <path d="M7 10h2v2H7zm0 4h2v2H7zm4-4h6v2h-6zm0 4h6v2h-6z"/>
+                    </svg>
+                    <span class="label">Continuar con navegador predeterminado<br><span class="not-recommended">(No recomendado)</span></span>
                 </a>
             </div>
         </div>
@@ -271,7 +307,8 @@
             // Afficher le choix de navigateur
             function showBrowserChoice() {
                 document.querySelector('.spinner').style.display = 'none';
-                document.querySelector('.message').textContent = 'Por favor, elige cómo continuar:';
+                document.querySelector('.message').style.display = 'none';
+                document.querySelector('.subtitle').style.display = 'none';
                 document.getElementById('browserChoice').classList.add('show');
             }
             
