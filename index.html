@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://search.google.com https://maps.google.com https://lh3.googleusercontent.com; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' https://lh3.googleusercontent.com data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://search.google.com https://maps.google.com https://lh3.googleusercontent.com https://upload.wikimedia.org; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' https://lh3.googleusercontent.com https://upload.wikimedia.org data:;">
     <title>Reseñas - Cool Tacos</title>
     <link rel="canonical" href="https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE">
     <style>
@@ -138,9 +138,14 @@
             background: #fafafa;
         }
         .browser-btn .icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             flex-shrink: 0;
+        }
+        .browser-btn .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .browser-btn .label {
             flex: 1;
@@ -210,13 +215,9 @@
             <p class="recommendation">(Recomendamos Chrome)</p>
             <div class="browser-buttons">
                 <a href="#" id="chromeBtn" class="browser-btn chrome">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" fill="#fff"/>
-                        <path fill="#EA4335" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                        <circle cx="12" cy="12" r="4" fill="#4285F4"/>
-                        <path fill="#34A853" d="M12 8c-2.21 0-4 1.79-4 4h8c0-2.21-1.79-4-4-4z"/>
-                        <path fill="#FBBC04" d="M12 8l-3.46 6h6.92L12 8z"/>
-                    </svg>
+                    <div class="icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" alt="Chrome">
+                    </div>
                     <span class="label">Google Chrome</span>
                 </a>
                 <a href="https://search.google.com/local/writereview?placeid=ChIJ8yK9bgCBYw0RYck5Qqq3WdE" class="browser-btn default">
